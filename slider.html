@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Image Slider</title>
+	<style>
+img {
+height:800px;
+}
+		.slider {
+width: 50%;
+  height: 50vh; /* 50% of viewport height */
+  overflow: hidden;
+  position: relative;
+  margin: auto;
+		}
+
+		.slide {
+			  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+		}
+
+		.slide.active {
+			opacity: 1;
+		}
+
+		.slide img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+
+		.prev, .next {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			font-size: 2em;
+			color: #fff;
+			cursor: pointer;
+		}
+
+		.prev {
+			left: 10px;
+		}
+
+		.next {
+			right: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="slider">
+		<div class="slide active">
+			<img src="images/4.png">
+		</div>
+		<div class="slide">
+			<img src="images/2.png">
+		</div>
+		<div class="slide">
+			<img src="images/1.png">
+		</div>
+		<a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+		<a class="next" onclick="changeSlide(1)">&#10095;</a>
+	</div>
+
+	<script>
+		let slideIndex = 1;
+		showSlide(slideIndex);
+
+		function changeSlide(n) {
+			showSlide(slideIndex += n);
+		}
+
+		function showSlide(n) {
+			let slides = document.getElementsByClassName("slide");
+			if (n > slides.length) { slideIndex = 1 }
+			if (n < 1) { slideIndex = slides.length }
+			for (let i = 0; i < slides.length; i++) {
+				slides[i].classList.remove("active");
+			}
+			slides[slideIndex - 1].classList.add("active");
+		}
+	</script>
+</body>
+</html>
